@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>KAM System – ER Diagram</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f172a; color: #e2e8f0; font-family: 'JetBrains Mono', 'Courier New', monospace; padding: 24px; min-height: 100vh; }
+  h1 { font-size: 1.5rem; color: #818cf8; margin-bottom: 4px; }
+  .sub { color: #64748b; font-size: 0.8rem; margin-bottom: 24px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 16px; }
+  .table { background: #1e293b; border: 1px solid #334155; border-radius: 10px; min-width: 220px; overflow: hidden; }
+  .table-header { padding: 10px 14px; font-weight: 700; font-size: 0.85rem; color: #a5b4fc; border-bottom: 1px solid #334155; background: #1e2d40; }
+  .pk { color: #fbbf24; }
+  .fk { color: #34d399; }
+  .col { padding: 5px 14px; font-size: 0.72rem; display: flex; gap: 10px; border-bottom: 1px solid #1e293b; }
+  .col:last-child { border-bottom: 0; }
+  .col-name { color: #cbd5e1; flex: 1; }
+  .col-type { color: #64748b; }
+  .col-key { font-size: 0.65rem; font-weight: 700; }
+  .legend { display: flex; gap: 20px; margin-bottom: 16px; font-size: 0.7rem; }
+  .leg { display: flex; align-items: center; gap: 5px; }
+  .dot { width: 10px; height: 10px; border-radius: 2px; }
+  .rel-section { margin-top: 24px; }
+  .rel-section h2 { color: #818cf8; font-size: 0.9rem; margin-bottom: 10px; }
+  .rel { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 10px 14px; font-size: 0.72rem; margin-bottom: 6px; color: #94a3b8; }
+  .rel strong { color: #a5b4fc; }
+  .rel .arrow { color: #64748b; }
+</style>
+</head>
+<body>
+<h1>KAM System – Entity Relationship Diagram</h1>
+<p class="sub">Database schema for Key Account Management System · SQLite (better-sqlite3)</p>
+
+<div class="legend">
+  <div class="leg"><div class="dot" style="background:#fbbf24"></div> Primary Key (PK)</div>
+  <div class="leg"><div class="dot" style="background:#34d399"></div> Foreign Key (FK)</div>
+  <div class="leg"><div class="dot" style="background:#6b7280"></div> Regular Column</div>
+</div>
+
+<div class="grid">
+
+  <div class="table">
+    <div class="table-header">📋 users</div>
+    <div class="col"><span class="col-key pk">PK</span><span class="col-name">id</span><span class="col-type">INTEGER</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">name</span><span class="col-type">TEXT NOT NULL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">email</span><span class="col-type">TEXT UNIQUE</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">password</span><span class="col-type">TEXT NOT NULL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">role</span><span class="col-type">TEXT DEFAULT 'manager'</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">created_at</span><span class="col-type">DATETIME</span></div>
+  </div>
+
+  <div class="table">
+    <div class="table-header">🏢 accounts</div>
+    <div class="col"><span class="col-key pk">PK</span><span class="col-name">id</span><span class="col-type">INTEGER</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">company_name</span><span class="col-type">TEXT NOT NULL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">industry</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">company_size</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">website</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">phone</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">address</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key fk">FK</span><span class="col-name">parent_id</span><span class="col-type">→ accounts.id</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">health_score</span><span class="col-type">INTEGER DEFAULT 70</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">journey_stage</span><span class="col-type">TEXT DEFAULT 'active'</span></div>
+    <div class="col"><span class="col-key fk">FK</span><span class="col-name">account_manager_id</span><span class="col-type">→ users.id</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">annual_revenue</span><span class="col-type">REAL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">notes</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">created_at</span><span class="col-type">DATETIME</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">updated_at</span><span class="col-type">DATETIME</span></div>
+  </div>
+
+  <div class="table">
+    <div class="table-header">👤 contacts</div>
+    <div class="col"><span class="col-key pk">PK</span><span class="col-name">id</span><span class="col-type">INTEGER</span></div>
+    <div class="col"><span class="col-key fk">FK</span><span class="col-name">account_id</span><span class="col-type">→ accounts.id</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">name</span><span class="col-type">TEXT NOT NULL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">email</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">phone</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">title</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">role</span><span class="col-type">TEXT (decision_maker etc.)</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">relationship_strength</span><span class="col-type">INTEGER 0-100</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">notes</span><span class="col-type">TEXT</span></div>
+  </div>
+
+  <div class="table">
+    <div class="table-header">📄 contracts</div>
+    <div class="col"><span class="col-key pk">PK</span><span class="col-name">id</span><span class="col-type">INTEGER</span></div>
+    <div class="col"><span class="col-key fk">FK</span><span class="col-name">account_id</span><span class="col-type">→ accounts.id</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">title</span><span class="col-type">TEXT NOT NULL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">template_type</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">status</span><span class="col-type">TEXT DEFAULT 'active'</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">start_date</span><span class="col-type">DATE</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">end_date</span><span class="col-type">DATE</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">value</span><span class="col-type">REAL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">version</span><span class="col-type">INTEGER DEFAULT 1</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">content</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key fk">FK</span><span class="col-name">created_by</span><span class="col-type">→ users.id</span></div>
+  </div>
+
+  <div class="table">
+    <div class="table-header">📊 slas</div>
+    <div class="col"><span class="col-key pk">PK</span><span class="col-name">id</span><span class="col-type">INTEGER</span></div>
+    <div class="col"><span class="col-key fk">FK</span><span class="col-name">contract_id</span><span class="col-type">→ contracts.id</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">metric</span><span class="col-type">TEXT NOT NULL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">target</span><span class="col-type">TEXT NOT NULL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">unit</span><span class="col-type">TEXT DEFAULT '%'</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">penalty_rate</span><span class="col-type">REAL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">current_compliance</span><span class="col-type">REAL DEFAULT 100</span></div>
+  </div>
+
+  <div class="table">
+    <div class="table-header">💰 revenue</div>
+    <div class="col"><span class="col-key pk">PK</span><span class="col-name">id</span><span class="col-type">INTEGER</span></div>
+    <div class="col"><span class="col-key fk">FK</span><span class="col-name">account_id</span><span class="col-type">→ accounts.id</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">type</span><span class="col-type">TEXT (mrr, upsell etc.)</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">amount</span><span class="col-type">REAL NOT NULL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">date</span><span class="col-type">DATE NOT NULL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">description</span><span class="col-type">TEXT</span></div>
+  </div>
+
+  <div class="table">
+    <div class="table-header">🧾 invoices</div>
+    <div class="col"><span class="col-key pk">PK</span><span class="col-name">id</span><span class="col-type">INTEGER</span></div>
+    <div class="col"><span class="col-key fk">FK</span><span class="col-name">account_id</span><span class="col-type">→ accounts.id</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">invoice_number</span><span class="col-type">TEXT UNIQUE</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">amount</span><span class="col-type">REAL NOT NULL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">tax_rate</span><span class="col-type">REAL DEFAULT 18</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">tax_amount</span><span class="col-type">REAL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">total_amount</span><span class="col-type">REAL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">status</span><span class="col-type">TEXT DEFAULT 'pending'</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">due_date</span><span class="col-type">DATE</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">paid_date</span><span class="col-type">DATE</span></div>
+  </div>
+
+  <div class="table">
+    <div class="table-header">📅 meetings</div>
+    <div class="col"><span class="col-key pk">PK</span><span class="col-name">id</span><span class="col-type">INTEGER</span></div>
+    <div class="col"><span class="col-key fk">FK</span><span class="col-name">account_id</span><span class="col-type">→ accounts.id</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">title</span><span class="col-type">TEXT NOT NULL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">date</span><span class="col-type">DATETIME NOT NULL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">type</span><span class="col-type">TEXT DEFAULT 'review'</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">notes</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">attendees</span><span class="col-type">TEXT (JSON array)</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">outcome</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">next_steps</span><span class="col-type">TEXT</span></div>
+  </div>
+
+  <div class="table">
+    <div class="table-header">💬 communications</div>
+    <div class="col"><span class="col-key pk">PK</span><span class="col-name">id</span><span class="col-type">INTEGER</span></div>
+    <div class="col"><span class="col-key fk">FK</span><span class="col-name">account_id</span><span class="col-type">→ accounts.id</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">type</span><span class="col-type">TEXT (email, call etc.)</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">subject</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">content</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">direction</span><span class="col-type">TEXT (inbound/outbound)</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">date</span><span class="col-type">DATETIME NOT NULL</span></div>
+    <div class="col"><span class="col-key fk">FK</span><span class="col-name">contact_id</span><span class="col-type">→ contacts.id</span></div>
+  </div>
+
+  <div class="table">
+    <div class="table-header">🏆 milestones</div>
+    <div class="col"><span class="col-key pk">PK</span><span class="col-name">id</span><span class="col-type">INTEGER</span></div>
+    <div class="col"><span class="col-key fk">FK</span><span class="col-name">account_id</span><span class="col-type">→ accounts.id</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">title</span><span class="col-type">TEXT NOT NULL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">description</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">date</span><span class="col-type">DATE NOT NULL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">type</span><span class="col-type">TEXT DEFAULT 'other'</span></div>
+  </div>
+
+  <div class="table">
+    <div class="table-header">⭐ feedback</div>
+    <div class="col"><span class="col-key pk">PK</span><span class="col-name">id</span><span class="col-type">INTEGER</span></div>
+    <div class="col"><span class="col-key fk">FK</span><span class="col-name">account_id</span><span class="col-type">→ accounts.id</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">score</span><span class="col-type">INTEGER NOT NULL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">type</span><span class="col-type">TEXT (nps, csat, ces)</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">comments</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">date</span><span class="col-type">DATE NOT NULL</span></div>
+  </div>
+
+  <div class="table">
+    <div class="table-header">✅ action_items</div>
+    <div class="col"><span class="col-key pk">PK</span><span class="col-name">id</span><span class="col-type">INTEGER</span></div>
+    <div class="col"><span class="col-key fk">FK</span><span class="col-name">account_id</span><span class="col-type">→ accounts.id</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">title</span><span class="col-type">TEXT NOT NULL</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">description</span><span class="col-type">TEXT</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">priority</span><span class="col-type">TEXT (high/medium/low)</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">due_date</span><span class="col-type">DATE</span></div>
+    <div class="col"><span class="col-key" style="color:#6b7280">  </span><span class="col-name">status</span><span class="col-type">TEXT DEFAULT 'open'</span></div>
+    <div class="col"><span class="col-key fk">FK</span><span class="col-name">assigned_to</span><span class="col-type">→ users.id</span></div>
+  </div>
+
+</div>
+
+<div class="rel-section">
+  <h2>Relationships</h2>
+  <div class="rel"><strong>users</strong> <span class="arrow">──── 1:N ────</span> <strong>accounts</strong> (account_manager_id)</div>
+  <div class="rel"><strong>accounts</strong> <span class="arrow">──── 1:N ────</span> <strong>accounts</strong> (self-ref: parent_id for hierarchy)</div>
+  <div class="rel"><strong>accounts</strong> <span class="arrow">──── 1:N ────</span> <strong>contacts</strong></div>
+  <div class="rel"><strong>accounts</strong> <span class="arrow">──── 1:N ────</span> <strong>contracts</strong></div>
+  <div class="rel"><strong>accounts</strong> <span class="arrow">──── 1:N ────</span> <strong>revenue</strong></div>
+  <div class="rel"><strong>accounts</strong> <span class="arrow">──── 1:N ────</span> <strong>invoices</strong></div>
+  <div class="rel"><strong>accounts</strong> <span class="arrow">──── 1:N ────</span> <strong>meetings</strong></div>
+  <div class="rel"><strong>accounts</strong> <span class="arrow">──── 1:N ────</span> <strong>communications</strong></div>
+  <div class="rel"><strong>accounts</strong> <span class="arrow">──── 1:N ────</span> <strong>milestones</strong></div>
+  <div class="rel"><strong>accounts</strong> <span class="arrow">──── 1:N ────</span> <strong>feedback</strong></div>
+  <div class="rel"><strong>accounts</strong> <span class="arrow">──── 1:N ────</span> <strong>action_items</strong></div>
+  <div class="rel"><strong>contracts</strong> <span class="arrow">──── 1:N ────</span> <strong>slas</strong></div>
+  <div class="rel"><strong>contacts</strong> <span class="arrow">──── 1:N ────</span> <strong>communications</strong> (contact_id)</div>
+  <div class="rel"><strong>users</strong> <span class="arrow">──── 1:N ────</span> <strong>contracts</strong> (created_by)</div>
+  <div class="rel"><strong>users</strong> <span class="arrow">──── 1:N ────</span> <strong>action_items</strong> (assigned_to)</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,339 @@
+{
+  "info": {
+    "name": "KAM System API",
+    "description": "Key Account Management System - Complete API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [{ "listen": "test", "script": { "exec": ["var res = pm.response.json();", "pm.collectionVariables.set('token', res.token);", "pm.test('Status 200', () => pm.response.to.have.status(200));"] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@kam.com\",\n  \"password\": \"admin123\"\n}" },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"New Manager\",\n  \"email\": \"manager@kam.com\",\n  \"password\": \"password123\",\n  \"role\": \"manager\"\n}" },
+            "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth", "register"] }
+          }
+        },
+        {
+          "name": "Get Me",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/auth/me", "host": ["{{baseUrl}}"], "path": ["auth", "me"] }
+          }
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/auth/users", "host": ["{{baseUrl}}"], "path": ["auth", "users"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Accounts",
+      "item": [
+        {
+          "name": "Get All Accounts",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/accounts?search=&stage=", "host": ["{{baseUrl}}"], "path": ["accounts"], "query": [{"key":"search","value":""},{"key":"stage","value":""}] }
+          }
+        },
+        {
+          "name": "Get Account by ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/accounts/1", "host": ["{{baseUrl}}"], "path": ["accounts", "1"] }
+          }
+        },
+        {
+          "name": "Create Account",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"company_name\": \"NewCo Industries\",\n  \"industry\": \"Technology\",\n  \"company_size\": \"51-200\",\n  \"website\": \"https://newco.com\",\n  \"phone\": \"+91-9999999999\",\n  \"address\": \"Bengaluru, Karnataka\",\n  \"health_score\": 75,\n  \"journey_stage\": \"prospect\",\n  \"annual_revenue\": 500000,\n  \"notes\": \"High potential account\"\n}" },
+            "url": { "raw": "{{baseUrl}}/accounts", "host": ["{{baseUrl}}"], "path": ["accounts"] }
+          }
+        },
+        {
+          "name": "Update Account",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"company_name\": \"Updated Corp\",\n  \"health_score\": 85,\n  \"journey_stage\": \"active\"\n}" },
+            "url": { "raw": "{{baseUrl}}/accounts/1", "host": ["{{baseUrl}}"], "path": ["accounts", "1"] }
+          }
+        },
+        {
+          "name": "Delete Account",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/accounts/5", "host": ["{{baseUrl}}"], "path": ["accounts", "5"] }
+          }
+        },
+        {
+          "name": "Get Contacts",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/accounts/1/contacts", "host": ["{{baseUrl}}"], "path": ["accounts", "1", "contacts"] }
+          }
+        },
+        {
+          "name": "Add Contact",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Ravi Kumar\",\n  \"email\": \"ravi@example.com\",\n  \"phone\": \"+91-9000000001\",\n  \"title\": \"Head of IT\",\n  \"role\": \"decision_maker\",\n  \"relationship_strength\": 70\n}" },
+            "url": { "raw": "{{baseUrl}}/accounts/1/contacts", "host": ["{{baseUrl}}"], "path": ["accounts", "1", "contacts"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contracts",
+      "item": [
+        {
+          "name": "Get All Contracts",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/contracts", "host": ["{{baseUrl}}"], "path": ["contracts"] }
+          }
+        },
+        {
+          "name": "Get Expiring Contracts",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/contracts/expiring?days=90", "host": ["{{baseUrl}}"], "path": ["contracts", "expiring"], "query": [{"key":"days","value":"90"}] }
+          }
+        },
+        {
+          "name": "Create Contract",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"account_id\": 1,\n  \"title\": \"Premium Support Agreement\",\n  \"template_type\": \"enterprise\",\n  \"status\": \"active\",\n  \"start_date\": \"2024-07-01\",\n  \"end_date\": \"2025-06-30\",\n  \"value\": 500000\n}" },
+            "url": { "raw": "{{baseUrl}}/contracts", "host": ["{{baseUrl}}"], "path": ["contracts"] }
+          }
+        },
+        {
+          "name": "Get SLA Penalty",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/contracts/1/slas/penalty", "host": ["{{baseUrl}}"], "path": ["contracts", "1", "slas", "penalty"] }
+          }
+        },
+        {
+          "name": "Add SLA",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"metric\": \"Response Time\",\n  \"target\": \"99.5\",\n  \"unit\": \"%\",\n  \"penalty_rate\": 5000,\n  \"current_compliance\": 98.2\n}" },
+            "url": { "raw": "{{baseUrl}}/contracts/1/slas", "host": ["{{baseUrl}}"], "path": ["contracts", "1", "slas"] }
+          }
+        },
+        {
+          "name": "Renew Contract",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"new_end_date\": \"2025-12-31\",\n  \"new_value\": 1400000\n}" },
+            "url": { "raw": "{{baseUrl}}/contracts/1/renew", "host": ["{{baseUrl}}"], "path": ["contracts", "1", "renew"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Revenue",
+      "item": [
+        {
+          "name": "Get Revenue Summary",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/revenue/summary", "host": ["{{baseUrl}}"], "path": ["revenue", "summary"] }
+          }
+        },
+        {
+          "name": "Add Revenue Entry",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"account_id\": 1,\n  \"type\": \"mrr\",\n  \"amount\": 100000,\n  \"date\": \"2024-07-01\",\n  \"description\": \"July MRR\"\n}" },
+            "url": { "raw": "{{baseUrl}}/revenue", "host": ["{{baseUrl}}"], "path": ["revenue"] }
+          }
+        },
+        {
+          "name": "Get All Invoices",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/revenue/invoices", "host": ["{{baseUrl}}"], "path": ["revenue", "invoices"] }
+          }
+        },
+        {
+          "name": "Generate Invoice",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"account_id\": 1,\n  \"amount\": 100000,\n  \"tax_rate\": 18,\n  \"due_date\": \"2024-08-01\",\n  \"notes\": \"July 2024 invoice\"\n}" },
+            "url": { "raw": "{{baseUrl}}/revenue/invoices", "host": ["{{baseUrl}}"], "path": ["revenue", "invoices"] }
+          }
+        },
+        {
+          "name": "Mark Invoice Paid",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"status\": \"paid\",\n  \"paid_date\": \"2024-07-25\"\n}" },
+            "url": { "raw": "{{baseUrl}}/revenue/invoices/1", "host": ["{{baseUrl}}"], "path": ["revenue", "invoices", "1"] }
+          }
+        },
+        {
+          "name": "Get Overdue Invoices",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/revenue/invoices/overdue", "host": ["{{baseUrl}}"], "path": ["revenue", "invoices", "overdue"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Engagement",
+      "item": [
+        {
+          "name": "Get All Meetings",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/engagement/meetings", "host": ["{{baseUrl}}"], "path": ["engagement", "meetings"] }
+          }
+        },
+        {
+          "name": "Log Meeting",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"account_id\": 1,\n  \"title\": \"Q3 Strategy Review\",\n  \"date\": \"2024-07-15T10:00\",\n  \"type\": \"review\",\n  \"notes\": \"Discussed Q3 roadmap and expansion plans\",\n  \"outcome\": \"Expansion proposal approved\",\n  \"next_steps\": \"Send detailed proposal by July 20\"\n}" },
+            "url": { "raw": "{{baseUrl}}/engagement/meetings", "host": ["{{baseUrl}}"], "path": ["engagement", "meetings"] }
+          }
+        },
+        {
+          "name": "Log Communication",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"account_id\": 1,\n  \"type\": \"email\",\n  \"subject\": \"Proposal for Q3 Expansion\",\n  \"content\": \"Please find our Q3 expansion proposal attached\",\n  \"direction\": \"outbound\",\n  \"date\": \"2024-07-16T09:30\"\n}" },
+            "url": { "raw": "{{baseUrl}}/engagement/communications", "host": ["{{baseUrl}}"], "path": ["engagement", "communications"] }
+          }
+        },
+        {
+          "name": "Record Feedback",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"account_id\": 1,\n  \"score\": 9,\n  \"type\": \"nps\",\n  \"comments\": \"Excellent platform performance this quarter\",\n  \"date\": \"2024-07-01\"\n}" },
+            "url": { "raw": "{{baseUrl}}/engagement/feedback", "host": ["{{baseUrl}}"], "path": ["engagement", "feedback"] }
+          }
+        },
+        {
+          "name": "Add Milestone",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"account_id\": 1,\n  \"title\": \"1000th Active User\",\n  \"description\": \"Client reached 1000 active users milestone\",\n  \"date\": \"2024-07-10\",\n  \"type\": \"other\"\n}" },
+            "url": { "raw": "{{baseUrl}}/engagement/milestones", "host": ["{{baseUrl}}"], "path": ["engagement", "milestones"] }
+          }
+        },
+        {
+          "name": "Get Account Timeline",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/engagement/timeline/1", "host": ["{{baseUrl}}"], "path": ["engagement", "timeline", "1"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "Overview",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/dashboard/overview", "host": ["{{baseUrl}}"], "path": ["dashboard", "overview"] }
+          }
+        },
+        {
+          "name": "Revenue Trend",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/dashboard/revenue-trend", "host": ["{{baseUrl}}"], "path": ["dashboard", "revenue-trend"] }
+          }
+        },
+        {
+          "name": "Health Distribution",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/dashboard/health-distribution", "host": ["{{baseUrl}}"], "path": ["dashboard", "health-distribution"] }
+          }
+        },
+        {
+          "name": "Churn Risk",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/dashboard/churn-risk", "host": ["{{baseUrl}}"], "path": ["dashboard", "churn-risk"] }
+          }
+        },
+        {
+          "name": "SLA Compliance",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/dashboard/sla-compliance", "host": ["{{baseUrl}}"], "path": ["dashboard", "sla-compliance"] }
+          }
+        },
+        {
+          "name": "Top Accounts",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/dashboard/top-accounts", "host": ["{{baseUrl}}"], "path": ["dashboard", "top-accounts"] }
+          }
+        }
+      ]
+    }
+  ]
+}
