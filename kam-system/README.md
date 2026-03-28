@@ -1,52 +1,52 @@
-# 🚀 Key Account Management (KAM) System
+#  Key Account Management (KAM) System
 
 A full-stack web application for managing high-value clients with relationship tracking, contract management, revenue monitoring, and account health analytics.
 
 ---
 
-## 🎯 Features
+##  Features
 
 ### 1. Account Management
-- ✅ Company profiles with hierarchy (parent-child relationships)
-- ✅ Key contacts with roles (Decision Maker, Influencer, Champion, Blocker)
-- ✅ Relationship strength indicators (0–100%)
-- ✅ Account health score with animated ring visualization
-- ✅ Customer journey stages (Prospect → Onboarding → Active → At Risk → Churned)
-- ✅ Full interaction history & timeline
+-  Company profiles with hierarchy (parent-child relationships)
+-  Key contacts with roles (Decision Maker, Influencer, Champion, Blocker)
+-  Relationship strength indicators (0–100%)
+-  Account health score with animated ring visualization
+-  Customer journey stages (Prospect → Onboarding → Active → At Risk → Churned)
+-  Full interaction history & timeline
 
 ### 2. Contract Management
-- ✅ Contract repository with template types (Standard, Enterprise, Custom)
-- ✅ Version control (auto-increments on content change)
-- ✅ Expiry alerts (90-day, 30-day warnings)
-- ✅ One-click renewal with new dates and values
-- ✅ SLA definition per contract (metric, target, penalty rate)
-- ✅ SLA compliance tracking with automatic penalty calculation
+-  Contract repository with template types (Standard, Enterprise, Custom)
+-  Version control (auto-increments on content change)
+-  Expiry alerts (90-day, 30-day warnings)
+-  One-click renewal with new dates and values
+-  SLA definition per contract (metric, target, penalty rate)
+-  SLA compliance tracking with automatic penalty calculation
 
 ### 3. Revenue & Financials
-- ✅ Revenue tracking: MRR, ACV, Upsell, Cross-sell, One-time
-- ✅ Monthly trend charts with multi-type bar visualization
-- ✅ Automated invoice generation with sequential numbering
-- ✅ GST/tax calculation (0%, 5%, 12%, 18%, 28%)
-- ✅ Payment status tracking (Pending → Paid / Overdue)
-- ✅ One-click "Mark as Paid" with payment date
+-  Revenue tracking: MRR, ACV, Upsell, Cross-sell, One-time
+-  Monthly trend charts with multi-type bar visualization
+-  Automated invoice generation with sequential numbering
+-  GST/tax calculation (0%, 5%, 12%, 18%, 28%)
+-  Payment status tracking (Pending → Paid / Overdue)
+-  One-click "Mark as Paid" with payment date
 
 ### 4. Engagement Tracking
-- ✅ Meeting logs with outcome and next steps
-- ✅ Communication history (Email, Call, Chat, In-Person)
-- ✅ Relationship milestones (Go-Live, Contract Signed, Renewal, etc.)
-- ✅ NPS / CSAT / CES feedback collection
-- ✅ Unified chronological timeline per account
+-  Meeting logs with outcome and next steps
+-  Communication history (Email, Call, Chat, In-Person)
+-  Relationship milestones (Go-Live, Contract Signed, Renewal, etc.)
+-  NPS / CSAT / CES feedback collection
+-  Unified chronological timeline per account
 
 ### 5. Account Health Dashboard
-- ✅ Health score trends across all accounts
-- ✅ Risk categorization (Healthy / Moderate / At Risk)
-- ✅ Churn prediction with multi-factor scoring
-- ✅ SLA compliance overview
-- ✅ Open action items with priority tracking
+-  Health score trends across all accounts
+-  Risk categorization (Healthy / Moderate / At Risk)
+-  Churn prediction with multi-factor scoring
+-  SLA compliance overview
+-  Open action items with priority tracking
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -62,7 +62,7 @@ A full-stack web application for managing high-value clients with relationship t
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 kam-system/
@@ -116,7 +116,7 @@ kam-system/
 
 ---
 
-## ⚡ Setup Instructions
+##  Setup Instructions
 
 ### Prerequisites
 - Node.js v18+
@@ -147,11 +147,11 @@ npm start
 npm run dev
 ```
 
-The backend runs on **http://localhost:5000**
+The backend runs on **http://localhost:5000/api/health**
 
-> ✅ The database is **auto-created** at `backend/data/kam.db` on first run  
-> ✅ **Seed data** (5 accounts, contacts, contracts, revenue) is auto-inserted  
-> ✅ Default login: `admin@kam.com` / `admin123`
+>  The database is **auto-created** at `backend/data/kam.db` on first run  
+>  **Seed data** (5 accounts, contacts, contracts, revenue) is auto-inserted  
+>  Default login: `admin@kam.com` / `admin123`
 
 ### 3. Frontend Setup
 
@@ -184,7 +184,7 @@ NODE_ENV=production npm start
 
 ---
 
-## 🔑 Authentication
+##  Authentication
 
 All API routes except `/api/auth/login` and `/api/auth/register` require a Bearer token.
 
@@ -196,7 +196,7 @@ Tokens expire in **7 days** (configurable via `JWT_EXPIRES_IN` in `.env`).
 
 ---
 
-## 📡 API Endpoints
+##  API Endpoints
 
 ### Auth
 | Method | Endpoint | Description |
@@ -278,7 +278,7 @@ Tokens expire in **7 days** (configurable via `JWT_EXPIRES_IN` in `.env`).
 
 ---
 
-## 🗃️ Database Schema
+##  Database Schema
 
 See `ER-Diagram.html` for the full visual entity-relationship diagram.
 
@@ -293,7 +293,7 @@ See `ER-Diagram.html` for the full visual entity-relationship diagram.
 
 ---
 
-## 🧪 Postman Collection
+##  Postman Collection
 
 Import `KAM-API.postman_collection.json` into Postman.
 
@@ -304,7 +304,7 @@ Import `KAM-API.postman_collection.json` into Postman.
 
 ---
 
-## 🎨 UI Design
+##  UI Design
 
 - Dark theme with slate/blue color system
 - Custom fonts: Syne (display), DM Sans (body)  
@@ -315,7 +315,7 @@ Import `KAM-API.postman_collection.json` into Postman.
 
 ---
 
-## 👤 Demo Credentials
+##  Demo Credentials
 
 | Role | Email | Password |
 |------|-------|----------|
@@ -324,7 +324,6 @@ Import `KAM-API.postman_collection.json` into Postman.
 | Manager | raj@kam.com | admin123 |
 
 ---
+## Demo Video
 
-## 📧 Contact
-
-Built as part of internship evaluation for Key Account Management System.
+[![Watch the video](https://drive.google.com/file/d/1r7sMsvaOSYt0Sdiin1Be_vFmlZDwVDCY/view?usp=drive_link)]
